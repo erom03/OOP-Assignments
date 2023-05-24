@@ -61,7 +61,7 @@ public class Arithmetic {
         Double denom;
 
         // Calculate the denominator of our equation
-        // If the posters used is past 50% through then we inverse the problem
+        // If the gas left is past 50% through then we inverse the problem
         if(postersUsed <= 50)
             denom = Math.sqrt((postersUsed * 2) / 100);
         else
@@ -70,10 +70,10 @@ public class Arithmetic {
         // Calculate the equations answer
         double eqAnswer = gasLeft * 2 / denom;
 
-        // Convert to our actual answer by subtracting the ceiling of our equation answer and gas left
+        // Convert to our actual answer by subtracting the equation answer and gas left
         double answer = eqAnswer - gasLeft;
 
-        // Print the ceiling of the answer
+        // Print the answer
         System.out.printf("Buy %.6f more gas%n", answer);
     }
 }
