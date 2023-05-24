@@ -20,7 +20,6 @@ public class Arithmetic {
 
         // Remove the percentage sign from the string
         percentage = percentage.substring(0, percentage.length() - 1);
-        System.out.println(percentage);
 
         // Assign the value without the sign to val2
         Double val2 = Double.parseDouble(percentage);
@@ -29,7 +28,7 @@ public class Arithmetic {
         if(firstWord.equals("Posters"))
             posters(val1, val2);
         else 
-            System.out.println("Hi its gas");
+            gas(val1, val2);
         
         // Close the scanner
         myScan.close();
@@ -37,10 +36,7 @@ public class Arithmetic {
     
     // Calculates how many posters are needed
     static void posters(Double posters, Double vanDist) {
-        // Create a new scanner
-        Scanner myScan = new Scanner(System.in);
-
-        // Get denominator of our equation
+        // Stores denominator of our equation
         Double denom;
 
         // Calculate the denominator of our equation
@@ -58,12 +54,26 @@ public class Arithmetic {
 
         // Print the ceiling of the answer
         System.out.println("Print " + answer + " more poster(s)");
-
-        // Close the scanner
-        myScan.close();
     }
 
     static void gas(Double gasLeft, Double postersUsed) {
+        // Stores denominator of our equation
+        Double denom;
 
+        // Calculate the denominator of our equation
+        // If the posters used is past 50% through then we inverse the problem
+        if(postersUsed <= 50)
+            denom = Math.sqrt((postersUsed * 2) / 100);
+        else
+            denom = 2 - Math.sqrt(((100 - postersUsed) * 2) / 100);
+
+        // Calculate the equations answer
+        double eqAnswer = gasLeft * 2 / denom;
+
+        // Convert to our actual answer by subtracting the ceiling of our equation answer and gas left
+        double answer = eqAnswer - gasLeft;
+
+        // Print the ceiling of the answer
+        System.out.printf("Buy %.6f more gas%n", answer);
     }
 }
