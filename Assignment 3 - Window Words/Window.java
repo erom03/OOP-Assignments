@@ -25,13 +25,17 @@ public class Window {
             for(int j = input[i].length() - 1; j >= 0; j--) {
                 // Check if we've hit a symbol
                 if(input[i].charAt(j) == '>') {
+                    // Create a temp variable we can change independent from j
                     int tmp = j;
 
+                    // Decrement tmp until we hit the index < is located at
                     while(input[i].charAt(tmp) != '<')
                         tmp--;
 
+                    // Print the substring from tmp to j inclusive
                     System.out.print(input[i].substring(tmp, j + 1));
 
+                    // Set j equal to the tmp value
                     j = tmp;
                 } else {
                     // Not a special character so we can just print it
