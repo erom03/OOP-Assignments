@@ -243,12 +243,14 @@ class Customer {
             // Check if the cat is north/south of customer
             if(currCat.getX() == x) {
                 // Check if cat is North and closer than current best distance
-                if(currCat.getY() - y > 0 && currCat.getY() - y < bestDist) {
-                    // Log new best distance
-                    bestDist = currCat.getY() - y;
+                if(currCat.getY() - y > 0) {
+                    if(currCat.getY() - y < bestDist) {
+                        // Log new best distance
+                        bestDist = currCat.getY() - y;
                     
-                    // Change direction to North
-                    curDirection = Direction.UP;
+                        // Change direction to North
+                        curDirection = Direction.UP;
+                    }
                 } else if(y - currCat.getY() < bestDist) {  // We know its south now check if its closer than the best distance
                     // Log new best distance
                     bestDist = y - currCat.getY();
@@ -258,12 +260,14 @@ class Customer {
                 }
             } else if(currCat.getY() == y) { // Now we check if the cat is east/west
                  // Check if cat is East and closer than current best distance
-                if(currCat.getX() - x > 0 && currCat.getX() - x < bestDist) {
-                    // Log new best distance
-                    bestDist = currCat.getX() - x;
+                if(currCat.getX() - x > 0) {
+                    if(currCat.getX() - x < bestDist) {
+                        // Log new best distance
+                        bestDist = currCat.getX() - x;
                     
-                    // Change direction to East
-                    curDirection = Direction.RIGHT;
+                        // Change direction to East
+                        curDirection = Direction.RIGHT;
+                    }
                 } else if(x - currCat.getX() < bestDist) {  // We know its West now check if its closer than the best distance
                     // Log new best distance
                     bestDist = x - currCat.getX();
@@ -299,8 +303,6 @@ class Customer {
                 x--;
             }
         }
-
-        System.out.println("Name " + name + " Direction " + curDirection + " " + x + " " + y);
 
         // Reset direction
         curDirection = Direction.NONE;
