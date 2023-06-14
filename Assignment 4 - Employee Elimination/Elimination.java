@@ -300,6 +300,7 @@ class Customer {
             }
         }
 
+        System.out.println("Name " + name + " Direction " + curDirection + " " + x + " " + y);
 
         // Reset direction
         curDirection = Direction.NONE;
