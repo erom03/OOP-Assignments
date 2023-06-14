@@ -258,6 +258,21 @@ class Customer {
                     // Change direction to SOUTH
                     curDirection = Direction.DOWN;
                 }
+            } else if(currCat.getY() == y) { // Now we check if the cat is east/west
+                 // Check if cat is East and closer than current best distance
+                if(currCat.getX() - x > 0 && currCat.getX() - x < bestDist) {
+                    // Log new best distance
+                    bestDist = currCat.getX() - x;
+                    
+                    // Change direction to East
+                    curDirection = Direction.RIGHT;
+                } else if(x - currCat.getX() < bestDist) {  // We know its West now check if its closer than the best distance
+                    // Log new best distance
+                    bestDist = x - currCat.getX();
+
+                    // Change direction to West
+                    curDirection = Direction.LEFT;
+                }
             }
         }
     }
