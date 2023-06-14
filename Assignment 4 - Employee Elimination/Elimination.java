@@ -234,7 +234,7 @@ class Customer {
                 continue;
 
             // Check if theres a cat in the customers location
-            if(currCat.getX() == x && currCat.getY() == y) {
+            if(overlaps(currCat)) {
                 // Set direction to none and break out the loop as there'll be no better cat
                 curDirection = Direction.NONE;
                 break;
@@ -278,29 +278,76 @@ class Customer {
     }
 
     // Method that handles Customer movement.
-    // If the Customer has no direction of their destination contains 
+    // If the Customer has no direction or their destination contains 
     // another unremoved Customer, then the Customer will not move.
     // If the customer has a direction and the destination conatains no
     // unremoved customers, the Customers will move in their given 
     // direction.
     // Regardless of outcome the current Customer will have no resulting
     // direction after "movement".
-    void move(Customer[] patrons) { /* TODO */ }
+    void move(Customer[] patrons) {
+        // Check for no collision
+        if(!collides(patrons)) {
+            if(curDirection == Direction.UP) { // Northern movement
+                y++;
+            }
+            if(curDirection == Direction.DOWN) { // Southern movement
+                y--;
+            }
+            if(curDirection == Direction.RIGHT) { // Eastern movement
+                x++;
+            }
+            if(curDirection == Direction.LEFT) { // Western movement
+                x--;
+            }
+        }
+    }
 
     // Method to check if a Customer could move into another patron.
     // Returns true if some unremoved Customer is at the destination 
     // location.
     // Returns false otherwise.
-    boolean collides(Customer[] patrons) { /* TODO */ 
-        return true; //placeholder
+    boolean collides(Customer[] patrons) {
+        // Loop through all the patrons
+        for(Customer currPatrons : patrons) {
+            // Check which way customer moves
+            if(curDirection == Direction.UP) { // Northern movement
+                // Check for collision
+                if(y + 1 == currPatrons.getY())
+                    return true;
+            }
+            if(curDirection == Direction.DOWN) { // Southern movement
+                // Check for collision
+                if(y - 1 == currPatrons.getY())
+                    return true;
+            }
+            if(curDirection == Direction.RIGHT) { // Eastern movement
+                // Check for collision
+                if(x + 1 == currPatrons.getY())
+                    return true;
+            }
+            if(curDirection == Direction.LEFT) { // Westward movement
+                // Check for collision
+                if(x - 1 == currPatrons.getY())
+                    return true;
+            }
+        }
+
+        // Customer doesnt collide
+        return false;
     }
 
     // Method to check if the Customer shares a space with a Cat.
     // Returns true if the Cat is not null, not removed, and has the same 
     // xy-position as the current customer.
     // Returns false otherwise.
-    boolean overlaps(Cat employee) { /* TODO */ 
-        return true; //placeholder
+    boolean overlaps(Cat employee) {
+        // Check for overlapping
+        if(employee != null && !employee.isRemoved() && 
+           employee.getX() == x && employee.getY() == y)
+           return true;
+        
+        return false; //Customer doesnt overlap with a cat
     }
     
     // Method to retrieve the x-coordinate of a Customer's position.
