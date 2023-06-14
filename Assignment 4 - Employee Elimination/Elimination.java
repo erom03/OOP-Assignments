@@ -248,8 +248,6 @@ class Customer {
                     bestDist = currCat.getY() - y;
                     
                     // Change direction to North
-                    // Professor why is it called north in the pdf but up in the enum
-                    // oh well im not changing the rest of my comments
                     curDirection = Direction.UP;
                 } else if(y - currCat.getY() < bestDist) {  // We know its south now check if its closer than the best distance
                     // Log new best distance
