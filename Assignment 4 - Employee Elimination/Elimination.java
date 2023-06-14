@@ -242,8 +242,9 @@ class Customer {
 
             // Check if the cat is north/south of customer
             if(currCat.getX() == x) {
-                // Check if cat is North and closer than current best distance
+                // Check if cat is North
                 if(currCat.getY() - y > 0) {
+                    // Check if the cat is closer than current best distance
                     if(currCat.getY() - y < bestDist) {
                         // Log new best distance
                         bestDist = currCat.getY() - y;
@@ -259,8 +260,9 @@ class Customer {
                     curDirection = Direction.DOWN;
                 }
             } else if(currCat.getY() == y) { // Now we check if the cat is east/west
-                 // Check if cat is East and closer than current best distance
+                 // Check if cat is East
                 if(currCat.getX() - x > 0) {
+                    // Check if the cat is closer than current best distance
                     if(currCat.getX() - x < bestDist) {
                         // Log new best distance
                         bestDist = currCat.getX() - x;
