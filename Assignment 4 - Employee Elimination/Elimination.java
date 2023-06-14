@@ -301,6 +301,9 @@ class Customer {
                 x--;
             }
         }
+
+        // Reset direction
+        curDirection = Direction.NONE;
     }
 
     // Method to check if a Customer could move into another patron.
@@ -310,6 +313,10 @@ class Customer {
     boolean collides(Customer[] patrons) {
         // Loop through all the patrons
         for(Customer currPatrons : patrons) {
+            // Skip current patron if removed
+            if(currPatrons.isRemoved())
+                continue;
+
             // Check which way customer moves
             if(curDirection == Direction.UP) { // Northern movement
                 // Check for collision
