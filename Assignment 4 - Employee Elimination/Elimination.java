@@ -229,8 +229,8 @@ class Customer {
 
         // Loop through each cat in array
         for(Cat currCat : Cats) {
-            // Skip current cat if its already removed
-            if(currCat.isRemoved())
+            // Skip current cat if its already removed or null
+            if(currCat == null || currCat.isRemoved())
                 continue;
 
             // Check if theres a cat in the customers location
