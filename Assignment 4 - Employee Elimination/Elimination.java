@@ -302,6 +302,7 @@ class Customer {
             }
         }
 
+
         // Reset direction
         curDirection = Direction.NONE;
     }
@@ -330,12 +331,12 @@ class Customer {
             }
             if(curDirection == Direction.RIGHT) { // Eastern movement
                 // Check for collision
-                if(x + 1 == currPatrons.getY())
+                if(x + 1 == currPatrons.getX())
                     return true;
             }
             if(curDirection == Direction.LEFT) { // Westward movement
                 // Check for collision
-                if(x - 1 == currPatrons.getY())
+                if(x - 1 == currPatrons.getX())
                     return true;
             }
         }
