@@ -318,7 +318,7 @@ class Customer {
         // Loop through all the patrons
         for(Customer currPatrons : patrons) {
             // Skip current patron if removed
-            if(currPatrons.isRemoved())
+            if(currPatrons == null || currPatrons.isRemoved())
                 continue;
 
             // Check which way customer moves
