@@ -75,6 +75,8 @@ public class Union
         // employee
         System.out.println("Some job was performed " + mostCompletedJob +
                            " times");
+
+        sc.close(); // The warning annoys me
     }
 }
 
