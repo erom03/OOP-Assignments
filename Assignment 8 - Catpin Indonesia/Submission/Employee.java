@@ -20,17 +20,22 @@ public abstract class Employee implements Comparable<Employee> {
    // Constructor to initialize the values of the employee object/
    // The employee does not start fired.
    Employee(int usefulness, int loyalty, int delay, int startingTime) {
-      // TODO
+      this.usefulness = usefulness;
+      this.loyalty = loyalty;
+      this.delay = delay;
+      order_finished_time = startingTime;
+      is_fired = false;
    }
 
    // Method to fire an employee
    void fire() {
-      // TODO
+      // TODO make sure this is correct
+      is_fired = true;
    }
 
    // Method to return whether an employee is fired or not
    public boolean amIFired() {
-      // TODO
+      return is_fired;
    }
 
    // Perform the following updates to the employee
@@ -38,7 +43,14 @@ public abstract class Employee implements Comparable<Employee> {
    //   * Increase the usefulness by 1
    // The usefulness in the cafe will need to be updated.
    public void train(Restaurant cafe) {
-      // TODO
+      // TODO update employee in any maps theyre currently in
+   
+      // Make sure we havent hit min delay
+      if(delay > 1) {
+         --delay;
+      }
+
+      ++usefulness;
    }
 
    // If not paid the full amount (1), then
@@ -47,7 +59,12 @@ public abstract class Employee implements Comparable<Employee> {
    // Otherwise
    //   * increase loyalty by 1
    public void pay(int amt) {
-      // TODO
+      if(amt == 1) { // Check if paying full amount
+         ++loyalty;
+      } else { // Handle if not paid full amount
+         --loyalty;
+         ++delay;
+      }
    }
 
    // Compare employees by their time they finished an order.
