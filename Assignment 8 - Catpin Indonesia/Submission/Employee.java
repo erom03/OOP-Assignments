@@ -72,6 +72,7 @@ public abstract class Employee implements Comparable<Employee> {
    // If they are still tied, the order does not matter...
    public int compareTo(Employee o) {
       // TODO if there are issues with employee order check here first, might be this
+      // TODO Forgot to compare by time finished
       if(delay != o.delay) {  // Make sure delays not equal
          if(delay < o.delay) {   // Return who has smaller delay
             return 1;
