@@ -29,7 +29,6 @@ public abstract class Employee implements Comparable<Employee> {
 
    // Method to fire an employee
    void fire() {
-      // TODO make sure this is correct
       is_fired = true;
    }
 
@@ -43,14 +42,13 @@ public abstract class Employee implements Comparable<Employee> {
    //   * Increase the usefulness by 1
    // The usefulness in the cafe will need to be updated.
    public void train(Restaurant cafe) {
-      // TODO update employee in any maps theyre currently in
-   
       // Make sure we havent hit min delay
       if(delay > 1) {
          --delay;
       }
 
-      ++usefulness;
+      // Change the usefulness by 1
+      changeUsefulness(cafe, 1);
    }
 
    // If not paid the full amount (1), then
@@ -73,7 +71,28 @@ public abstract class Employee implements Comparable<Employee> {
    // Third Tie break by usefulness (largest first)
    // If they are still tied, the order does not matter...
    public int compareTo(Employee o) {
-      // TODO
+      // TODO if there are issues with employee order check here first, might be this
+      if(delay != o.delay) {  // Make sure delays not equal
+         if(delay < o.delay) {   // Return who has smaller delay
+            return 1;
+         } else {
+            return -1;
+         }
+      } else if(loyalty != o.loyalty) {   // Make sure loyalty is not equal
+         if(loyalty < o.loyalty) {  // Return who has more loyalty
+            return -1;
+         } else {
+            return 1;
+         }
+      } else if(usefulness != o.usefulness) {   // Make sure usefulness is not equal
+         if(usefulness < o.usefulness) {  // Return who has more usefulness
+            return -1;
+         } else {
+            return 1;
+         }
+      } else {
+         return 1;
+      }
    }
 
    // Method to modify this employee's usefulness
@@ -83,7 +102,7 @@ public abstract class Employee implements Comparable<Employee> {
 
    // Method to set the time that the customer will finish their next order
    public void setNextOrderFinishedTime(int newTime) {
-      // TODO
+      order_finished_time = newTime;
    }
    
    // The worker will successfully work if they have a higher loyalty than 

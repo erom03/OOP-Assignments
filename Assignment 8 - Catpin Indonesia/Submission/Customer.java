@@ -10,48 +10,71 @@ public class Customer implements Comparable<Customer>{
 
    // Constructor
    Customer(String name, int difficulty, int payment, int desiredEndTime) {
-      // TODO
+      this.name = name;
+      this.difficulty = difficulty;
+      this.payment = payment;
+      desired_end_time = desiredEndTime;
    }
 
    // Method to change the reputation and pay the cafe
    public void finishServingCustomer(Restaurant cafe) {
-      // TODO
+      // Change reputation
+      changeReputationOfRestaurant(cafe);
+
+      // Pay the cafe
+      cafe.decrementMoney(-payment);
    }
 
    // Method to sort customers by their finish time.
    // Tie break by name
    public int compareTo(Customer o) {
-      // TODO
+      // Check for tie
+      if(finish_time == o.finish_time)
+         return(name.compareTo(o.name));  // Handle the tie
+
+      if(finish_time > o.finish_time)  // Check which is greater
+         return 1;   // if the first is greater
+      else
+         return -1;  // if the second is greater
    }
 
    // Reduce the price of a drink by 1 (to a minimum of 0)
    public void giveDiscount() {
-      // TODO
+      // Check if above minimum
+      if(payment > 0)
+         --payment;
    }
 
    // Method to set the order finish time for the customer
    public void setFinishTime(int finishTime) {
-      // TODO
+      finish_time = finishTime;
    }
 
    // Method to return the computed finish time for this customer
    public int getFinishTime() {
-      // TODO
+      return finish_time;
    }
 
    // Method to increment the change in time for the employee by the given 
    // delta time
    public void addToEndTime(int delta) {
-      // TODO
+      finish_time += delta;
    }
    
    // Method to change the amount the customer will change the reputation of
    // the cafe once they get their order
    public void changeReputationDelta(int reputationDeltaDelta) {
-      // TODO
+      reputation_delta += reputationDeltaDelta;
    }
 
    public void changeReputationOfRestaurant(Restaurant cafe) {
-      // TODO
+      int absDelta = Math.abs(reputation_delta);
+
+      for(int i = 0; i < absDelta; i++) {
+         if(reputation_delta > 0)
+            cafe.incrementReputation();
+         else
+            cafe.decrementReputation();
+      }
    }
 }

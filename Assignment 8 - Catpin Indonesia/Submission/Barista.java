@@ -3,7 +3,8 @@
 public class Barista extends Employee {
    // The constructor for a barista
    Barista(int usefulness, int loyalty, int delay, int starting_time) {
-      // TODO
+      // Call the super constructor
+      super(usefulness, loyalty, delay, starting_time);
    }
 
    // If the Barista fails to work successfully due to a high difficulty

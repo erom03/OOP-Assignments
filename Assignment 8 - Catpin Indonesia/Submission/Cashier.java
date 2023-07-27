@@ -2,7 +2,8 @@
 // The class for a cashier. They collect the money from the customer.
 public class Cashier extends Employee {
    Cashier(int usefulness, int loyalty, int delay, int starting_time) {
-      // TODO
+      // Call the super constructor
+      super(usefulness, loyalty, delay, starting_time);
    }
 
    // If the Casier fails to work successfully due to a high difficulty 

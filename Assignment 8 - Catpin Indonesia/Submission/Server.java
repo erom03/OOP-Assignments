@@ -3,7 +3,8 @@ public class Server extends Employee {
    
    // Constructor for a server.
    Server(int usefulness, int loyalty, int delay, int starting_time) {
-      // TODO
+      // Call the super constructor
+      super(usefulness, loyalty, delay, starting_time);
    }
 
    // If the Server fails to work successfully due to a high difficulty
