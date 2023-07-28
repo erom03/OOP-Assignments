@@ -46,7 +46,8 @@ public class Main {
                     break;
 
                 case "TIME":
-                    int changeInTime = sc.nextInt();
+                    tokens = line.split(" ");
+                    int changeInTime = Integer.parseInt(tokens[0]);
                     cafe.progessTime(changeInTime);
                     break;
 
