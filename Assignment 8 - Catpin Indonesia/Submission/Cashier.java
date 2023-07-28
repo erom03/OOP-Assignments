@@ -20,9 +20,6 @@ public class Cashier extends Employee {
          // Handle base case for all employee types
          success = true;
          changeUsefulness(cafe, 1);
-
-         // Increase reputation for giving the order
-         cafe.incrementReputation();
       }
       else {
          // Handle base case for all employee types
@@ -31,6 +28,9 @@ public class Cashier extends Employee {
 
          // Lower the price for poor service :(
          customer.giveDiscount();
+
+         // Increase reputation for giving the discount
+         cafe.incrementReputation();
       }
 
       return success;
