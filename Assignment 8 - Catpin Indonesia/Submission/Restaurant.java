@@ -158,7 +158,7 @@ public class Restaurant {
          
          Customer currCustomer = waiting_for_order_queue.peek();
          
-         if(currCustomer.getFinishTime() < cur_time) {
+         if(currCustomer.getFinishTime() <= cur_time) {
             // Finish serving the customer
             currCustomer.finishServingCustomer(this);
 
@@ -206,7 +206,45 @@ public class Restaurant {
    // order.
    // Return the number of employees that were trained.
    public int trainWorst() {
-      // TODO
+      int numTrained = 0;  // Track num trained
+
+      // Get the worst employees
+      ArrayList<Employee> theWorst = employees_by_usefulness.get(employees_by_usefulness.firstKey());
+
+      for(Employee currEmp : theWorst) {
+         // Check theyre available
+         if(currEmp.order_finished_time > cur_time) continue;
+         
+         /*
+         // Remove employee from work queues
+         if(currEmp instanceof Barista) {
+            barista_work_queue.remove((Barista)currEmp);
+         } else if(currEmp instanceof Cashier) {
+            cashier_work_queue.remove((Cashier)currEmp);
+         } else if(currEmp instanceof Server) {
+            server_work_queue.remove((Server)currEmp);
+         }
+         */
+
+         // Train the employee
+         currEmp.train(this);
+
+         /*
+         // Add employee to work queues
+         if(currEmp instanceof Barista) {
+            barista_work_queue.add((Barista)currEmp);
+         } else if(currEmp instanceof Cashier) {
+            cashier_work_queue.add((Cashier)currEmp);
+         } else if(currEmp instanceof Server) {
+            server_work_queue.add((Server)currEmp);
+         }
+         */
+
+         // Increment number of employees trained
+         ++numTrained;
+      }
+
+      return numTrained;
    }
 
    // Try to serve a customer using a Server, Cashier, and Barista.
@@ -215,12 +253,38 @@ public class Restaurant {
    // When the employees serve the customer, all three employees will be
    // preoccupied until the customer has finished being served.
    public void makeOrder(Customer customer) {
-      // TODO
-      // Make sure all 3 are available
-      // This is going to look a little ugly but oh well
-      if(server_work_queue.isEmpty() || cashier_work_queue.isEmpty() || barista_work_queue.isEmpty()) {
+      // Get the three employees that would help customer
+      Employee barista = barista_work_queue.peek();
+      Employee server = server_work_queue.peek();
+      Employee cashier = cashier_work_queue.peek();
 
-      }
+      // Check they're available
+      if(barista == null || barista.order_finished_time > cur_time) return;
+      if(server == null || server.order_finished_time > cur_time) return;
+      if(cashier == null || cashier.order_finished_time > cur_time) return;
+
+      // Remove them from Priority queues so we can update them
+      barista_work_queue.poll();
+      server_work_queue.poll();
+      cashier_work_queue.poll();
+
+      // Assign new time finished to the workers
+      barista.order_finished_time = customer.desired_end_time;
+      server.order_finished_time = customer.desired_end_time;
+      cashier.order_finished_time = customer.desired_end_time;
+
+      // Have the employees work
+      barista.work(customer, this);
+      server.work(customer, this);
+      cashier.work(customer, this);
+
+      // Add workers back to queue
+      barista_work_queue.add((Barista)barista);
+      server_work_queue.add((Server)server);
+      cashier_work_queue.add((Cashier)cashier);
+
+      // Add customer to queue
+      waiting_for_order_queue.add(customer);
    }
 
    // Method to decrement the reputation of the store by 1.

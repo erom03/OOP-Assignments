@@ -14,5 +14,26 @@ public class Cashier extends Employee {
    // details.
    public boolean work(Customer customer, Restaurant cafe) {
       // TODO
+      boolean success;
+
+      // Check if employee can do the work
+      if(loyalty > customer.difficulty) {
+         // Handle base case for all employee types
+         success = true;
+         changeUsefulness(cafe, 1);
+
+         // Increase reputation for giving the order
+         cafe.incrementReputation();
+      }
+      else {
+         // Handle base case for all employee types
+         success = false;
+         changeUsefulness(cafe, -1);
+
+         // Lower the price for poor service :(
+         customer.giveDiscount();
+      }
+
+      return success;
    }
 }

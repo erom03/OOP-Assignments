@@ -14,6 +14,23 @@ public class Barista extends Employee {
    // The customer saw what you did Felix!
    // Please read the comment about the work method in the employee class.
    public boolean work(Customer customer, Restaurant cafe) {
-      // TODO
+      boolean success;
+
+      // Check if employee can do the work
+      if(loyalty > customer.difficulty) {
+         // Handle base case for all employee types
+         success = true;
+         changeUsefulness(cafe, 1);
+      }
+      else {
+         // Handle base case for all employee types
+         success = false;
+         changeUsefulness(cafe, -1);
+
+         // Decrease resturant reputation
+         cafe.decrementReputation();
+      }
+
+      return success;
    }
 }

@@ -72,8 +72,13 @@ public abstract class Employee implements Comparable<Employee> {
    // If they are still tied, the order does not matter...
    public int compareTo(Employee o) {
       // TODO if there are issues with employee order check here first, might be this
-      // TODO Forgot to compare by time finished
-      if(delay != o.delay) {  // Make sure delays not equal
+      if(order_finished_time != o.order_finished_time) { // Make sure time finished isnt equal 
+         if(order_finished_time < o.order_finished_time) {   // Return who finishes sooner
+            return 1;
+         } else {
+            return -1;
+         }
+      } else if(delay != o.delay) {  // Make sure delays not equal
          if(delay < o.delay) {   // Return who has smaller delay
             return 1;
          } else {
@@ -98,7 +103,37 @@ public abstract class Employee implements Comparable<Employee> {
 
    // Method to modify this employee's usefulness
    public void changeUsefulness(Restaurant cafe, int changeInUsefulness) {
-      // TODO
+      // Remove the employee from old location in resturant employee map
+      ArrayList<Employee> oldList = cafe.employees_by_usefulness.get(usefulness);
+
+      // Remove employee from list
+      oldList.remove(this);
+
+      // Handle possibly empty list
+      if(oldList.isEmpty()) {
+         cafe.employees_by_usefulness.remove(usefulness);
+      } else {
+         // replace the outdaded entry
+         cafe.employees_by_usefulness.replace(usefulness, oldList);
+      }
+      
+      // Update employees usefulness
+      usefulness += changeInUsefulness;
+
+      // Update employee in resturaunt
+      ArrayList<Employee> newList = cafe.employees_by_usefulness.get(usefulness);
+
+      // Handle no existing key at the employee map
+      if(newList == null) {
+         // Create the arraylist
+         newList = new ArrayList<>();
+      }
+
+      // Add employee to list
+      newList.add(this);
+
+      // Add the new list to the map
+      cafe.employees_by_usefulness.put(usefulness, newList);
    }
 
    // Method to set the time that the customer will finish their next order

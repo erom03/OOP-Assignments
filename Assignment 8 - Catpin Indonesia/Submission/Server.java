@@ -11,5 +11,23 @@ public class Server extends Employee {
    // cusomter the employee with double their delay to serve the customer
    public boolean work(Customer customer, Restaurant cafe) {
       // TODO
+      boolean success;
+
+      // Check if employee can do the work
+      if(loyalty > customer.difficulty) {
+         // Handle base case for all employee types
+         success = true;
+         changeUsefulness(cafe, 1);
+      }
+      else {
+         // Handle base case for all employee types
+         success = false;
+         changeUsefulness(cafe, -1);
+
+         // Double the delay
+         delay *= 2;
+      }
+
+      return success;
    }
 }
