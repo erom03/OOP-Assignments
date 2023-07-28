@@ -49,12 +49,14 @@ public class Restaurant {
       // Track if weve fired someone yet
       boolean firedSomeone = false;
 
-      // Used to track current key, first set at first key
-      int currKey = employees_by_usefulness.firstKey();
+      // Used to track current key
+      int currKey = 0;
 
       // Find at which usefulness value we have employees to fire and mark them
       // To be fired
       for(int i = 0; i < mapSize; i++) {
+         currKey = employees_by_usefulness.firstKey();
+
          // Get the arraylist of employees
          ArrayList<Employee> employeeArray = employees_by_usefulness.get(currKey);
          
@@ -75,9 +77,6 @@ public class Restaurant {
          // Check if someone has been fired so we know if to
          // move on to next usefulness value or not
          if(firedSomeone) break;
-
-         // Change currKey to the next one
-         currKey = employees_by_usefulness.higherKey(currKey);
       }
       
       // Check if we fired someone at all
@@ -112,10 +111,12 @@ public class Restaurant {
    public void payEmployees() {
       int mapSize = employees_by_usefulness.size();
 
-      // Used to track current key, first set at last key
-      int currKey = employees_by_usefulness.lastKey();
+      System.out.println(mapSize);
 
       for(int i = 0; i < mapSize; i++) {
+         // Used to track current key, first set at last key
+         int currKey = employees_by_usefulness.lastKey();
+
           // Get the arraylist of employees
          ArrayList<Employee> employeeArray = employees_by_usefulness.get(currKey);
          
@@ -126,9 +127,6 @@ public class Restaurant {
             } else 
                currEmp.pay(0);
          }
-
-         // Get next key
-         currKey = employees_by_usefulness.lowerKey(currKey);
       }
    }
 
