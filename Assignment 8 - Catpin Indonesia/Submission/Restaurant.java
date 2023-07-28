@@ -55,6 +55,7 @@ public class Restaurant {
       // Find at which usefulness value we have employees to fire and mark them
       // To be fired
       for(int i = 0; i < mapSize; i++) {
+         // TODO figure this out its just the same key over and over right now
          currKey = employees_by_usefulness.firstKey();
 
          // Get the arraylist of employees
@@ -82,20 +83,19 @@ public class Restaurant {
       // Check if we fired someone at all
       if(!firedSomeone) return;
 
-      // Remove the fired employees
+      // Get list from where we removed employees
       ArrayList<Employee> newEmployeeArray = employees_by_usefulness.get(currKey);
-      // Used to iterate through array while doing removal
-      ArrayList<Employee> cloneEmployeeArray = employees_by_usefulness.get(currKey);
-   
-      for(var currEmp : cloneEmployeeArray) {
+      
+      for(var currEmp : newEmployeeArray) {
          // Check if the current employee is fired
          if(currEmp.amIFired()) {
-            newEmployeeArray.remove(currEmp);
-            
             // Give severence
             decrementMoney(1);
          }
       }
+
+      // Remove fired employees
+      newEmployeeArray.removeIf(emp -> emp.amIFired());  // Dr Meade cleared me to use this at office hours just saying
 
       // Check if arraylist is empty to remove key
       if(newEmployeeArray.isEmpty())
@@ -111,10 +111,9 @@ public class Restaurant {
    public void payEmployees() {
       int mapSize = employees_by_usefulness.size();
 
-      System.out.println(mapSize);
-
       for(int i = 0; i < mapSize; i++) {
          // Used to track current key, first set at last key
+         // TODO figure this out lol its just the same key over and over
          int currKey = employees_by_usefulness.lastKey();
 
           // Get the arraylist of employees
