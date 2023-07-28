@@ -24,7 +24,7 @@ public class Restaurant {
    Restaurant(int startingMoney, int startingReputation, int maxReputation) {
       // Initialize given vals
       money = startingMoney;
-      cur_reputation = startingMoney;
+      cur_reputation = startingReputation;
       max_reputation = maxReputation;
 
       // Set time
