@@ -13,7 +13,6 @@ public class Cashier extends Employee {
    // Please read the comment for the work method of the Employee for more
    // details.
    public boolean work(Customer customer, Restaurant cafe) {
-      // TODO
       boolean success;
 
       // Check if employee can do the work

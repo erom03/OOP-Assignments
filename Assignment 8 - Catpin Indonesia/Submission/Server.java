@@ -10,7 +10,6 @@ public class Server extends Employee {
    // If the Server fails to work successfully due to a high difficulty
    // cusomter the employee with double their delay to serve the customer
    public boolean work(Customer customer, Restaurant cafe) {
-      // TODO
       boolean success;
 
       // Check if employee can do the work
