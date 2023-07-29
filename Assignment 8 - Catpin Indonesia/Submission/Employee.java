@@ -71,7 +71,6 @@ public abstract class Employee implements Comparable<Employee> {
    // Third Tie break by usefulness (largest first)
    // If they are still tied, the order does not matter...
    public int compareTo(Employee o) {
-      // TODO if there are issues with employee order check here first, might be this
       if(order_finished_time != o.order_finished_time) { // Make sure time finished isnt equal 
          if(order_finished_time < o.order_finished_time) {   // Return who finishes sooner
             return 1;
