@@ -56,7 +56,11 @@ public class Restaurant {
       // To be fired
       for(int i = 0; i < mapSize; i++) {
          // TODO figure this out its just the same key over and over right now
-         currKey = employees_by_usefulness.firstKey();
+         if(i == 0) {
+            currKey = employees_by_usefulness.firstKey();
+         } else {
+            currKey = employees_by_usefulness.higherKey(currKey);
+         }
 
          // Get the arraylist of employees
          ArrayList<Employee> employeeArray = employees_by_usefulness.get(currKey);
@@ -108,11 +112,16 @@ public class Restaurant {
    // Some employees may be paid 0.
    public void payEmployees() {
       int mapSize = employees_by_usefulness.size();
+      int currKey = 0;
 
       for(int i = 0; i < mapSize; i++) {
          // Used to track current key, first set at last key
          // TODO figure this out lol its just the same key over and over
-         int currKey = employees_by_usefulness.lastKey();
+         if(i == 0) {
+            currKey = employees_by_usefulness.lastKey();
+         } else {
+            currKey = employees_by_usefulness.lowerKey(currKey);
+         }
 
           // Get the arraylist of employees
          ArrayList<Employee> employeeArray = employees_by_usefulness.get(currKey);
