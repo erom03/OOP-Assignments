@@ -29,8 +29,8 @@ public class Cashier extends Employee {
          // Lower the price for poor service :(
          customer.giveDiscount();
 
-         // Increase reputation for giving the discount
-         cafe.incrementReputation();
+         // Make sure to increase reputation once they get their order
+         customer.changeReputationDelta(1);
       }
 
       return success;

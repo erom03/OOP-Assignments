@@ -27,8 +27,8 @@ public class Barista extends Employee {
          success = false;
          changeUsefulness(cafe, -1);
 
-         // Decrease resturant reputation
-         cafe.decrementReputation();
+         // Decrease resturant reputation when the customer gets their order
+         customer.changeReputationDelta(-1);
       }
 
       return success;
