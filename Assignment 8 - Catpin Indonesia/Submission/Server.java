@@ -24,7 +24,7 @@ public class Server extends Employee {
          changeUsefulness(cafe, -1);
 
          // Double the delay
-         delay *= 2;
+         customer.addToEndTime(delay);
       }
 
       return success;
