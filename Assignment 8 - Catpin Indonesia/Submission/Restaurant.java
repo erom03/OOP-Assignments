@@ -55,7 +55,6 @@ public class Restaurant {
       // Find at which usefulness value we have employees to fire and mark them
       // To be fired
       for(int i = 0; i < mapSize; i++) {
-         // TODO figure this out its just the same key over and over right now
          if(i == 0) {
             currKey = employees_by_usefulness.firstKey();
          } else {
@@ -116,7 +115,6 @@ public class Restaurant {
 
       for(int i = 0; i < mapSize; i++) {
          // Used to track current key, first set at last key
-         // TODO figure this out lol its just the same key over and over
          if(i == 0) {
             currKey = employees_by_usefulness.lastKey();
          } else {
@@ -243,18 +241,24 @@ public class Restaurant {
       if(server == null || server.order_finished_time > cur_time) return;
       if(cashier == null || cashier.order_finished_time > cur_time) return;
 
+      // Find the current finish time using the employees delay
+      int finishedTime = barista.delay + cashier.delay + cashier.delay;
+
       // Assign new time finished to the workers
-      barista.order_finished_time = customer.desired_end_time;
-      server.order_finished_time = customer.desired_end_time;
-      cashier.order_finished_time = customer.desired_end_time;
+      barista.order_finished_time = finishedTime;
+      server.order_finished_time = finishedTime;
+      cashier.order_finished_time = finishedTime;
+
+      // Set the customer finish time
+      customer.setFinishTime(finishedTime);
+
+      // Add customer to queue
+      waiting_for_order_queue.add(customer);
 
       // Have the employees work
       barista.work(customer, this);
       server.work(customer, this);
       cashier.work(customer, this);
-
-      // Add customer to queue
-      waiting_for_order_queue.add(customer);
    }
 
    // Method to decrement the reputation of the store by 1.
