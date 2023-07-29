@@ -112,9 +112,6 @@ public abstract class Employee implements Comparable<Employee> {
       // Handle possibly empty list
       if(oldList.isEmpty()) {
          cafe.employees_by_usefulness.remove(usefulness);
-      } else {
-         // replace the outdaded entry
-         cafe.employees_by_usefulness.replace(usefulness, oldList);
       }
       
       // Update employees usefulness

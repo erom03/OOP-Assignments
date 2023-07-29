@@ -100,8 +100,6 @@ public class Restaurant {
       // Check if arraylist is empty to remove key
       if(newEmployeeArray.isEmpty())
          employees_by_usefulness.remove(currKey);
-      else  // If not then update the treemap with the new array
-         employees_by_usefulness.replace(currKey, newEmployeeArray);
    }
 
    // "Pay" all the employees their 1 unit. 
@@ -176,8 +174,6 @@ public class Restaurant {
          ArrayList<Employee> newList = employees_by_usefulness.get(newEmployee.usefulness);
          // add the new employee to the list
          newList.add(newEmployee);
-         // replace the old list
-         employees_by_usefulness.replace(newEmployee.usefulness, newList);
       } else {
          // Create the arraylist for the new key
          ArrayList<Employee> newList = new ArrayList<>();
@@ -211,31 +207,9 @@ public class Restaurant {
       for(Employee currEmp : theWorst) {
          // Check theyre available
          if(currEmp.order_finished_time > cur_time) continue;
-         
-         /*
-         // Remove employee from work queues
-         if(currEmp instanceof Barista) {
-            barista_work_queue.remove((Barista)currEmp);
-         } else if(currEmp instanceof Cashier) {
-            cashier_work_queue.remove((Cashier)currEmp);
-         } else if(currEmp instanceof Server) {
-            server_work_queue.remove((Server)currEmp);
-         }
-         */
 
          // Train the employee
          currEmp.train(this);
-
-         /*
-         // Add employee to work queues
-         if(currEmp instanceof Barista) {
-            barista_work_queue.add((Barista)currEmp);
-         } else if(currEmp instanceof Cashier) {
-            cashier_work_queue.add((Cashier)currEmp);
-         } else if(currEmp instanceof Server) {
-            server_work_queue.add((Server)currEmp);
-         }
-         */
 
          // Increment number of employees trained
          ++numTrained;
@@ -260,11 +234,6 @@ public class Restaurant {
       if(server == null || server.order_finished_time > cur_time) return;
       if(cashier == null || cashier.order_finished_time > cur_time) return;
 
-      // Remove them from Priority queues so we can update them
-      barista_work_queue.poll();
-      server_work_queue.poll();
-      cashier_work_queue.poll();
-
       // Assign new time finished to the workers
       barista.order_finished_time = customer.desired_end_time;
       server.order_finished_time = customer.desired_end_time;
@@ -274,11 +243,6 @@ public class Restaurant {
       barista.work(customer, this);
       server.work(customer, this);
       cashier.work(customer, this);
-
-      // Add workers back to queue
-      barista_work_queue.add((Barista)barista);
-      server_work_queue.add((Server)server);
-      cashier_work_queue.add((Cashier)cashier);
 
       // Add customer to queue
       waiting_for_order_queue.add(customer);
