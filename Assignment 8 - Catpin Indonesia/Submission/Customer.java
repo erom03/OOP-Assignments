@@ -18,6 +18,15 @@ public class Customer implements Comparable<Customer>{
 
    // Method to change the reputation and pay the cafe
    public void finishServingCustomer(Restaurant cafe) {
+      // Check if we got the drink on time
+      int timeDelta = desired_end_time - finish_time;
+      
+      if(timeDelta >= 0) { // Got the drink on time
+         changeReputationDelta(1);
+      } else { // Drink was late
+         changeReputationDelta(-1);
+      }
+
       // Change reputation
       changeReputationOfRestaurant(cafe);
 
@@ -68,8 +77,11 @@ public class Customer implements Comparable<Customer>{
    }
 
    public void changeReputationOfRestaurant(Restaurant cafe) {
+      // Get how much we should change the reputation by
       int absDelta = Math.abs(reputation_delta);
 
+      // Change the reputation by 1 as many times as we should
+      // While accounting for if it should be positive or negative
       for(int i = 0; i < absDelta; i++) {
          if(reputation_delta > 0)
             cafe.incrementReputation();
